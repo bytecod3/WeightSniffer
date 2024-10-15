@@ -2890,7 +2890,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
 			(at 93.98 59.69 0)
 			(effects
 				(font
@@ -3026,7 +3026,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_THT:LED_D3.0mm"
 			(at 93.98 52.07 0)
 			(effects
 				(font
@@ -3294,7 +3294,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 179.07 135.89 0)
 			(effects
 				(font
@@ -3370,7 +3370,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
 			(at 109.22 80.01 0)
 			(effects
 				(font
@@ -3643,7 +3643,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Buzzer_Beeper:Buzzer_D14mm_H7mm_P10mm"
 			(at 173.355 77.47 90)
 			(effects
 				(font
@@ -3711,7 +3711,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 99.06 85.09 0)
 			(effects
 				(font
