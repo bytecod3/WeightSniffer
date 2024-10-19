@@ -3,6 +3,7 @@
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "HX711.h"
 
 #define GPIO_BUTTON             12
 #define GPIO_BUTTON_PIN_SEL     (1UL << GPIO_BUTTON)   
@@ -58,6 +59,7 @@ void buzz(void) {
 // }
 
 /**
+ * 
  * read push button
  * 
  */
