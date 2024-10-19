@@ -1,25 +1,23 @@
 #include <stddef.h>
+#include <stdio.h>
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
 #define GPIO_BUTTON             12
 #define GPIO_BUTTON_PIN_SEL     (1UL << GPIO_BUTTON)   
-#define GPIO_BUZZ               14
+#define GPIO_BUZZ               4
 #define GPIO_BUZZ_PIN_SEL       (1UL << GPIO_BUZZ)  
-#define BUZZ_INTERVAL           200
+#define BUZZ_INTERVAL           100
 #define ESP_INTR_FLAG_DEFAULT   0
 
 static TickType_t next = 0;
 double weight = 0.0;
 
-static void button_handler(void *arg);
-void buzz(void);
-
 /**
  * hardware initialization function
  */
-static void init_hw(void) {
+static void init_hw() {
     gpio_config_t io_conf; 
     
     // init the buzzer as output
@@ -38,8 +36,8 @@ static void init_hw(void) {
     gpio_config(&io_conf);
 
     // attach the ISR
-    gpio_install_isr_service(ESP_INTR_FLAG_DEFAULT);
-    gpio_isr_handler_add(GPIO_BUTTON, button_handler, NULL);
+    // gpio_install_isr_service(ESP_INTR_FLAG_DEFAULT);
+    // gpio_isr_handler_add(GPIO_BUTTON, button_handler, NULL);
 }
 
 /**
@@ -53,23 +51,6 @@ void buzz(void) {
 }
 
 /**
- * Interrupt service routine for the button
- */
-static void IRAM_ATTR button_handler(void* arg) {
-    TickType_t now = xTaskGetTickCountFromISR();
-
-    // debounce button
-    if(now > next) {
-
-        // send data to uart 
-        
-
-        buzz();
-        next = now + 500 / portTICK_PERIOD_MS;
-    }
-}
-
-/**
  * read the weight from load cell
  */
 // double read_load_cell(void) {
@@ -77,16 +58,37 @@ static void IRAM_ATTR button_handler(void* arg) {
 // }
 
 /**
+ * read push button
  * 
  */
 
-void app_main() {
+uint8_t read_button() {
+    TickType_t now = xTaskGetTickCount();
+    uint8_t bv = 1;
+    if(now - next ) {
+        bv = gpio_get_level(GPIO_BUTTON);
+        printf("%d\n", bv);
+        next = now + 500 / portTICK_PERIOD_MS;
+    }
+
+    return bv;
+}
+
+int app_main() {
 
     // system setup 
     init_hw();
 
-    while (1){
+    while(1) {
+        uint8_t c = read_button();
+
+        if(!c) {
+            buzz();
+        }
+
+        vTaskDelay(100 / portTICK_PERIOD_MS);
 
     }
+   
 
 }
